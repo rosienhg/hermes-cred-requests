@@ -1,0 +1,25 @@
+# Byte-compiled / caches
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+
+# Environments
+.venv/
+venv/
+env/
+
+# Packaging
+build/
+dist/
+*.egg-info/
+
+# Local state this plugin writes at runtime — never commit these
+credential-requests.json
+credential-requests.json.corrupt
+
+# Editors / OS
+.DS_Store
+.idea/
+.vscode/
+*.swp

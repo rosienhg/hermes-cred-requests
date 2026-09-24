@@ -1,0 +1,21 @@
+{
+  "title": "Acme API credentials",
+  "why": "so I can call the Acme API on your behalf",
+  "ttl_days": 7,
+  "fields": [
+    {
+      "name": "client_id",
+      "label": "Client ID",
+      "secret": false,
+      "hint": "the public identifier, from the Acme dashboard",
+      "dest": { "kind": "env", "target": "ACME_CLIENT_ID" }
+    },
+    {
+      "name": "client_secret",
+      "label": "Client secret",
+      "secret": true,
+      "hint": "rotate it after we are done if you want",
+      "dest": { "kind": "env", "target": "ACME_CLIENT_SECRET" }
+    }
+  ]
+}

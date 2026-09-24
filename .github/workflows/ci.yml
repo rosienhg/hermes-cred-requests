@@ -1,0 +1,56 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  tests:
+    name: tests (python ${{ matrix.python-version }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.10", "3.12"]
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Install test dependencies
+        run: pip install pytest fastapi httpx
+
+      - name: Run tests
+        # The env-destination tests skip without the Hermes source tree; everything else runs.
+        run: pytest -q
+
+      - name: Byte-compile
+        run: python -m compileall -q credstore.py __init__.py dashboard/plugin_api.py
+
+  bundle:
+    name: bundle and manifests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Parse the bundle
+        run: node --check dashboard/dist/index.js
+
+      - name: Validate the dashboard manifest
+        run: python -m json.tool dashboard/manifest.json > /dev/null
+
+      - name: Validate the plugin manifest and the name contract
+        run: |
+          pip install pyyaml
+          python scripts/check_manifests.py .

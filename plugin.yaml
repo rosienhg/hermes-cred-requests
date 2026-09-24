@@ -1,0 +1,6 @@
+name: hermes-cred-requests
+version: 1.0.0
+description: "Credential requests: the agent files a request for a secret, the user fills it in on a dashboard tab, and the value lands at its destination without ever entering the chat."
+author: rosienhg
+kind: standalone
+requires_hermes: ">=0.21.0"

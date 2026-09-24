@@ -1,0 +1,13 @@
+{
+  "name": "hermes-cred-requests",
+  "label": "Credential Requests",
+  "description": "Ask the user for a secret without it ever entering the chat: the request appears on this tab and the value he types is written straight to its destination (an env var in ~/.hermes/.env, or a 0600 file).",
+  "icon": "KeyRound",
+  "version": "1.0.0",
+  "tab": {
+    "path": "/cred-requests",
+    "position": "after:sessions"
+  },
+  "entry": "dist/index.js",
+  "api": "plugin_api.py"
+}
