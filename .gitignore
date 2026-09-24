@@ -11,8 +11,10 @@ env/
 
 # Packaging
 build/
-dist/
 *.egg-info/
+
+# NOTE: dashboard/dist/ is deliberately NOT ignored — the dashboard plugin bundle ships as-is
+# (no build step), so it must be committed. Anything under it is part of the release.
 
 # Local state this plugin writes at runtime — never commit these
 credential-requests.json
